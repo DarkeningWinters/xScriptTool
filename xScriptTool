@@ -1,0 +1,30 @@
+#!/bin/bash
+clear
+DIRECTORY=$(cd "`dirname "$0"`" && pwd)
+cd $DIRECTORY
+tput setaf 33;cat ./Banners/banner.txt;tput setaf default
+tput setaf 45;echo "============================================================";tput setaf 46;
+options=("New Project" "Load Project" "Backup Projects" "Quit")
+select opt in "${options[@]}"
+do
+    case $opt in
+        "New Project")
+            bash ./Options/NewProject
+            ;;
+        "Load Project")
+            cd ./Projects
+            read -e -p 'Project: ' session
+            export name=$session
+            cd ../
+            bash ./Options/Builder
+            ;;
+        "Backup Projects")
+            bash ./Options/backup-projects
+            ;;
+        "Quit")
+            break
+            ;;
+        *) echo invalid option;;
+    esac
+done
+

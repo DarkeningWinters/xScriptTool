@@ -1,0 +1,13 @@
+#!/bin/bash
+
+if [[ $EUID -ne 0 ]]; then
+   echo "This script must be run as root" 
+   exit 1
+fi
+
+cd ./Output
+read -e -p 'File to add: ' file
+cp $file /usr/bin/$file && chmod +x /usr/bin/$file
+
+echo "You can now run the command '${file}' to launch it at any time" 
+sleep 5s

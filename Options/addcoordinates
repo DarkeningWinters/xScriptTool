@@ -1,0 +1,18 @@
+#!/bin/bash
+source ./Projects/$name/$name.cfg
+file=$name
+echo "Enter 0 for no sleep interval"
+read -p 'Sleep Interval: ' time
+echo "Bring your mouse to the part of the screen that you want the coordinates added for and hit the 'A' key "
+while true; do
+read -rsn1 input
+if [ "$input" = "a" ]; then
+	m=`xdotool getmouselocation|sed 's/x:\(.*\) y:\(.*\) screen:.*/\1 \2/'`
+        echo xdotool mousemove --sync ${m} click 1 >> ./Projects/$name/$name.sh
+	echo xdotool mousemove --sync ${m} click 1
+	echo "sleep $time" >> ./Projects/$name/$name.sh  
+#	echo "xdotool mousemove --sync 2878 645 click 1" >> ./Projects/$name/$name.sh
+else
+    bash ./Options/Builder
+fi
+done

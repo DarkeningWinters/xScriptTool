@@ -1,0 +1,39 @@
+#!/bin/bash
+clear
+source ./Projects/$name/$name.cfg
+tput setaf 33;cat ./Banners/banner.txt;tput setaf default
+tput setaf 45;
+echo "+==========================================================+";tput setaf 46;
+
+options=("Add Coordinates to Project" "Add while loop to Project" "Edit with Nano" "Test Project" "Backup Project $name" "Upload Projects script to transfer.sh" "Main Menu")
+select opt in "${options[@]}"
+do
+    case $opt in
+        "Add Coordinates to Project")
+            ./Options/addcoordinates
+            ;;
+        "Add while loop to Project")
+            sed -i '1 i\while true; do' ./Projects/$name/$name.sh
+	    sed -ie "\$adone" ./Projects/$name/$name.sh
+            echo "While Loop Has been Added"
+            ;;
+        "Edit with Nano")
+            nano ./Projects/$name/$name.sh && bash ./Options/Builder
+            ;;
+        "Test Project")
+            bash ./Projects/$name/$name.sh
+            ;;
+        "Backup Project $name")
+            export name=$name
+            ./Options/backup-project
+            ;;
+        "Upload Projects script to transfer.sh")
+            bash ./Options/transfer.sh
+            ;;
+        "Main Menu")
+            bash ./xScriptTool
+            ;;
+        *) echo invalid option;;
+    esac
+done
+

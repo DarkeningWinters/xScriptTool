@@ -1,0 +1,4 @@
+#!/bin/bash
+date=`date +%Y-%m-%d.%H:%M:%S`
+tar -cpzf ./Backups/$name-$date.tar.gz ./Projects/$name/
+echo Project $name has been successfully backed up to Backups/$name-$date.tar.gz

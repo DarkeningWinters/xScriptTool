@@ -1,0 +1,14 @@
+#!/bin/bash
+echo "Please name the script you would like to start working on."
+read -e -p 'Script Name: ' name
+mkdir ./Projects/$name
+touch ./Projects/$name/$name.sh
+touch ./Projects/$name/$name.cfg
+echo "name=$name" >> ./Projects/$name/$name.cfg
+echo "lastsession=$name" > ./Projects/last.session
+export name=$name
+bash ./Options/Builder
+
+
+
+
